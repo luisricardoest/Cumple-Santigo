@@ -136,6 +136,48 @@
       background: linear-gradient(135deg, var(--red), var(--red-dark));
     }
 
+    .tap-sound-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,.38);
+      text-align: center;
+    }
+
+    .tap-sound-layer.show {
+      display: flex;
+    }
+
+    .tap-sound-card {
+      width: min(440px, 100%);
+      border-radius: 26px;
+      padding: 22px;
+      background: rgba(0,0,0,.72);
+      border: 1px solid rgba(247,201,72,.35);
+      box-shadow: 0 26px 80px rgba(0,0,0,.75);
+      backdrop-filter: blur(10px);
+    }
+
+    .tap-sound-card strong {
+      display: block;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      color: var(--gold);
+      letter-spacing: 1px;
+      line-height: .95;
+      margin-bottom: 10px;
+    }
+
+    .tap-sound-card p {
+      color: #f2f2f2;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
     /* ================= MAIN ================= */
     .page {
       position: relative;
@@ -775,6 +817,14 @@
           <button class="intro-btn skip" type="button" id="skipBtn">Saltar intro</button>
         </div>
       </div>
+
+      <div class="tap-sound-layer" id="tapSoundLayer">
+        <div class="tap-sound-card">
+          <strong>Presiona para iniciar</strong>
+          <p>Tu navegador bloqueó el sonido automático. Toca aquí para reproducir el video con sonido.</p>
+          <button class="intro-btn" type="button" id="startWithSoundBtn">▶️ Reproducir con sonido</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -835,7 +885,8 @@
 
           <div class="hero-photo">
             <div class="photo-help">
-             
+              Para mostrar la foto principal, sube una imagen con este nombre:
+              <b>img/santiaguito.jpeg</b>
             </div>
           </div>
         </div>
@@ -968,6 +1019,8 @@
     const soundBtn = document.getElementById("soundBtn");
     const skipBtn = document.getElementById("skipBtn");
     const replayBtn = document.getElementById("replayBtn");
+    const tapSoundLayer = document.getElementById("tapSoundLayer");
+    const startWithSoundBtn = document.getElementById("startWithSoundBtn");
 
     function finishIntro() {
       intro.classList.add("hidden");
@@ -985,53 +1038,71 @@
       }
     }
 
-    function toggleSound() {
-      if (introVideo.muted || introVideo.volume === 0) {
-        introVideo.muted = false;
-        introVideo.volume = 1;
-      } else {
-        introVideo.muted = true;
-        introVideo.volume = 0;
-      }
+    function playWithSound() {
+      introVideo.muted = false;
+      introVideo.volume = 1;
+
+      return introVideo.play()
+        .then(() => {
+          tapSoundLayer.classList.remove("show");
+          updateSoundButton();
+        });
+    }
+
+    function playMutedFallback() {
+      introVideo.muted = true;
+      introVideo.volume = 0;
 
       introVideo.play().catch(() => {});
+      tapSoundLayer.classList.add("show");
       updateSoundButton();
     }
 
+    function toggleSound() {
+      if (introVideo.muted || introVideo.volume === 0) {
+        playWithSound().catch(() => {
+          tapSoundLayer.classList.add("show");
+          updateSoundButton();
+        });
+      } else {
+        introVideo.muted = true;
+        introVideo.volume = 0;
+        updateSoundButton();
+      }
+    }
+
     function tryStartVideoWithSound() {
+      introVideo.currentTime = 0;
       introVideo.muted = false;
       introVideo.volume = 1;
 
       introVideo.play()
         .then(() => {
+          tapSoundLayer.classList.remove("show");
           updateSoundButton();
         })
         .catch(() => {
-          // Algunos navegadores bloquean audio automático.
-          // En ese caso se reproduce en silencio hasta que el usuario toque "Activar sonido".
-          introVideo.muted = true;
-          introVideo.volume = 0;
-          introVideo.play().catch(() => {});
-          updateSoundButton();
+          playMutedFallback();
         });
     }
 
     function replayIntro() {
       intro.classList.remove("hidden");
       introVideo.currentTime = 0;
-      introVideo.muted = false;
-      introVideo.volume = 1;
-      introVideo.play().catch(() => {
-        introVideo.muted = true;
-        introVideo.volume = 0;
-        introVideo.play().catch(() => {});
+
+      playWithSound().catch(() => {
+        playMutedFallback();
       });
-      updateSoundButton();
     }
 
     soundBtn.addEventListener("click", toggleSound);
     skipBtn.addEventListener("click", finishIntro);
     replayBtn.addEventListener("click", replayIntro);
+    startWithSoundBtn.addEventListener("click", () => {
+      playWithSound().catch(() => {
+        updateSoundButton();
+      });
+    });
 
     introVideo.addEventListener("ended", finishIntro);
 
