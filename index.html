@@ -252,6 +252,7 @@
 
     .hero-card {
       width:100%;
+      max-width:100%;
       display:grid;
       grid-template-columns:1fr 1fr;
       border-radius:44px;
@@ -280,11 +281,13 @@
     }
 
     .hero-title {
-      font-size:clamp(5rem,13vw,9.8rem);
-      line-height:.78;
+      font-size:clamp(3.8rem,11vw,8.8rem);
+      line-height:.86;
       color:var(--red);
       text-transform:uppercase;
       text-shadow:4px 4px 0 #fff,8px 8px 0 #111;
+      overflow-wrap:anywhere;
+      word-break:normal;
     }
 
     .hero-title span {
@@ -298,7 +301,9 @@
       line-height:1.55;
       font-weight:800;
       color:#fff6c7;
-      font-size:clamp(1rem,2.8vw,1.23rem);
+      font-size:clamp(.96rem,2.8vw,1.18rem);
+      max-width:100%;
+      overflow-wrap:break-word;
     }
 
     .actions {
@@ -730,7 +735,20 @@
       .container { width:min(100% - 20px,1140px); padding-top:18px; }
       .hero { min-height:auto; }
       .hero-card { border-radius:30px; }
-      .hero-content { padding:24px; }
+      .hero-content { padding:22px 18px; }
+      .hero-title {
+        font-size:clamp(3.2rem,18vw,5.4rem);
+        line-height:.88;
+        letter-spacing:1px;
+        text-shadow:3px 3px 0 #fff,6px 6px 0 #111;
+      }
+      .hero-title span {
+        text-shadow:3px 3px 0 var(--red),6px 6px 0 #111;
+      }
+      .subtitle {
+        font-size:.96rem;
+        line-height:1.48;
+      }
       .hero-photo { min-height:470px; }
       .actions { flex-direction:column; }
       .btn { width:100%; }
@@ -802,18 +820,18 @@
             <div class="badge">🏁 Invitación oficial de carrera</div>
 
             <h1 class="hero-title">
-              Copa
+              Cumpleaños
               <span>Santiaguito</span>
             </h1>
 
             <p class="subtitle">
-              Prepárate para una fiesta llena de velocidad, juegos, alegría, sorpresas y mucha diversión.
-              Santiaguito te espera en la pista para celebrar su segunda carrera inolvidable.
+              Una celebración premium con velocidad, alegría y emoción.
+              Ponte en la parrilla de salida para festejar el gran día de Santiaguito.
             </p>
 
             <div class="actions">
               <a class="btn blue"
-                 href="https://www.google.com/maps/search/?api=1&query=Av.%20Nuevo%20Palmar%20a%20Una%20cuadra%20del%20surtidor%20El%20Palmar%20Santa%20Cruz%20de%20la%20Sierra"
+                 href="https://maps.app.goo.gl/gUhQF2tQjg3ANPEj8"
                  target="_blank"
                  rel="noopener">📍 Cómo llegar</a>
 
@@ -987,7 +1005,7 @@
 
         <div class="actions" style="justify-content:center">
           <a class="btn blue"
-             href="https://www.google.com/maps/search/?api=1&query=Av.%20Nuevo%20Palmar%20a%20Una%20cuadra%20del%20surtidor%20El%20Palmar%20Santa%20Cruz%20de%20la%20Sierra"
+             href="https://maps.app.goo.gl/gUhQF2tQjg3ANPEj8"
              target="_blank"
              rel="noopener">🗺️ Abrir ubicación</a>
 
