@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Santiaguito GP | Invitación de Cumpleaños</title>
+  <meta name="description" content="Invitación digital del Gran Premio de Cumpleaños de Santiaguito" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #d90429;
+      --red-dark: #7f0015;
+      --gold: #f7c948;
+      --gold-soft: #ffe08a;
+      --black: #030303;
+      --carbon: #111117;
+      --white: #ffffff;
+      --gray: #c9c9d1;
+      --green: #25d366;
+      --blue: #2563eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Montserrat", sans-serif;
+      color: var(--white);
+      background: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* ================= VIDEO INTRO ================= */
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .9s ease, visibility .9s ease;
+    }
+
+    .intro.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .intro-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.58)),
+        radial-gradient(circle at center, transparent 28%, rgba(0,0,0,.78));
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .intro-panel {
+      width: min(460px, 100%);
+      text-align: center;
+      padding: 22px;
+      border-radius: 28px;
+      background: rgba(0,0,0,.58);
+      border: 1px solid rgba(247,201,72,.28);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 26px 80px rgba(0,0,0,.75);
+    }
+
+    .intro-panel h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(3rem, 11vw, 5.2rem);
+      letter-spacing: 2px;
+      line-height: .9;
+      color: var(--gold);
+      text-shadow: 0 0 28px rgba(247,201,72,.75);
+    }
+
+    .intro-panel p {
+      margin: 10px 0 16px;
+      font-size: .95rem;
+      color: #eee;
+      font-weight: 800;
+    }
+
+    .intro-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .intro-btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 900;
+      color: #111;
+      background: linear-gradient(135deg, var(--gold), #fff3ad);
+      box-shadow: 0 14px 30px rgba(0,0,0,.45);
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .intro-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .intro-btn.skip {
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+    }
+
+    .tap-sound-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,.38);
+      text-align: center;
+    }
+
+    .tap-sound-layer.show {
+      display: flex;
+    }
+
+    .tap-sound-card {
+      width: min(440px, 100%);
+      border-radius: 26px;
+      padding: 22px;
+      background: rgba(0,0,0,.72);
+      border: 1px solid rgba(247,201,72,.35);
+      box-shadow: 0 26px 80px rgba(0,0,0,.75);
+      backdrop-filter: blur(10px);
+    }
+
+    .tap-sound-card strong {
+      display: block;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      color: var(--gold);
+      letter-spacing: 1px;
+      line-height: .95;
+      margin-bottom: 10px;
+    }
+
+    .tap-sound-card p {
+      color: #f2f2f2;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    /* ================= MAIN ================= */
+    .page {
+      position: relative;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(217,4,41,.38), transparent 34%),
+        radial-gradient(circle at 80% 20%, rgba(247,201,72,.22), transparent 28%),
+        linear-gradient(145deg, #120004 0%, #050506 50%, #1e1600 100%);
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          118deg,
+          transparent 0 34px,
+          rgba(255,255,255,.045) 35px 37px
+        );
+      opacity: .58;
+      animation: speedLines 2.1s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.72)),
+        radial-gradient(circle at center, transparent 30%, rgba(0,0,0,.48));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes speedLines {
+      from { background-position: 0 0; }
+      to { background-position: 240px 0; }
+    }
+
+    .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .confetti span {
+      position: absolute;
+      top: -20px;
+      width: 8px;
+      height: 15px;
+      border-radius: 3px;
+      animation: confettiFall linear infinite;
+      opacity: .88;
+    }
+
+    .confetti span:nth-child(3n) { background: var(--red); }
+    .confetti span:nth-child(3n+1) { background: var(--gold); }
+    .confetti span:nth-child(3n+2) { background: #fff; }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      min-height: 96vh;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-card {
+      width: 100%;
+      border-radius: 38px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.035)),
+        rgba(8,8,12,.82);
+      border: 1px solid rgba(247,201,72,.22);
+      box-shadow: 0 38px 110px rgba(0,0,0,.72);
+      backdrop-filter: blur(16px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-content {
+      padding: clamp(24px, 5vw, 56px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 0 26px rgba(217,4,41,.48);
+      margin-bottom: 18px;
+    }
+
+    .title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(4.4rem, 12vw, 9rem);
+      line-height: .82;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .title .gold {
+      display: block;
+      color: var(--gold);
+      text-shadow: 0 0 38px rgba(247,201,72,.54);
+    }
+
+    .subtitle {
+      margin-top: 20px;
+      color: #eeeeee;
+      font-weight: 700;
+      font-size: clamp(1rem, 2.8vw, 1.25rem);
+      line-height: 1.55;
+    }
+
+    .hero-photo {
+      min-height: 620px;
+      position: relative;
+      background:
+        linear-gradient(to top, rgba(0,0,0,.9), transparent 55%),
+        url("img/santiaguito.jpeg");
+      background-size: cover;
+      background-position: center;
+      border-left: 1px solid rgba(247,201,72,.18);
+    }
+
+    .hero-photo::after {
+      content: "PILOTO DEL DÍA";
+      position: absolute;
+      top: 28px;
+      right: 22px;
+      transform: rotate(4deg);
+      background: linear-gradient(135deg, var(--gold), #fff1a6);
+      color: #111;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.45);
+    }
+
+    .photo-help {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 13px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.68);
+      border: 1px solid rgba(247,201,72,.20);
+      color: #ddd;
+      font-size: .82rem;
+      line-height: 1.35;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 18px;
+      padding: 15px 18px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: transform .2s ease, filter .2s ease;
+      box-shadow: 0 16px 36px rgba(0,0,0,.42);
+      font-family: inherit;
+      font-size: .95rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      filter: brightness(1.08);
+    }
+
+    .btn.gold {
+      background: linear-gradient(135deg, var(--gold), #fff0a4);
+      color: #111;
+    }
+
+    .btn.green {
+      background: linear-gradient(135deg, #25d366, #128c4a);
+      color: white;
+    }
+
+    .btn.blue {
+      background: linear-gradient(135deg, #2f7dff, #153ea3);
+      color: white;
+    }
+
+    /* ================= INFO ================= */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .info-card {
+      padding: 24px;
+      border-radius: 26px;
+      background:
+        linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+      border: 1px solid rgba(247,201,72,.16);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+
+    .info-card .icon {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+
+    .info-card small {
+      color: var(--gold-soft);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .info-card h3 {
+      margin-top: 6px;
+      font-size: 1.08rem;
+    }
+
+    /* ================= SECTIONS ================= */
+    .section {
+      margin: 28px 0;
+      padding: clamp(22px, 4vw, 36px);
+      border-radius: 32px;
+      background:
+        linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
+      border: 1px solid rgba(247,201,72,.16);
+      box-shadow: 0 24px 70px rgba(0,0,0,.38);
+      backdrop-filter: blur(12px);
+    }
+
+    .section-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.7rem, 7vw, 5rem);
+      text-align: center;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 18px;
+      text-shadow: 0 0 24px rgba(247,201,72,.25);
+    }
+
+    /* ================= COUNTDOWN ================= */
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .timebox {
+      text-align: center;
+      padding: 20px 10px;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.78), rgba(255,255,255,.06));
+      border: 1px solid rgba(247,201,72,.14);
+    }
+
+    .timebox strong {
+      display: block;
+      font-family: "Bebas Neue", sans-serif;
+      color: #fff;
+      font-size: clamp(2.8rem, 8vw, 5.2rem);
+      line-height: .9;
+    }
+
+    .timebox span {
+      color: var(--gold);
+      font-weight: 900;
+      font-size: .78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .track {
+      margin-top: 26px;
+      height: 96px;
+      border-radius: 999px;
+      border: 5px solid #25252b;
+      background:
+        linear-gradient(180deg, #1d1d22 0%, #0b0b0d 48%, #24242a 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 30px rgba(0,0,0,.9);
+    }
+
+    .track::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 45px;
+      height: 8px;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0 28px,
+        var(--gold) 28px 56px
+      );
+      animation: roadMove .55s linear infinite;
+      opacity: .9;
+    }
+
+    @keyframes roadMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-56px); }
+    }
+
+    .css-car {
+      position: absolute;
+      top: 22px;
+      left: -150px;
+      width: 138px;
+      height: 50px;
+      animation: carForward 4.5s linear infinite;
+      filter: drop-shadow(0 14px 10px rgba(0,0,0,.55));
+    }
+
+    @keyframes carForward {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(100vw + 320px)); }
+    }
+
+    .car-body {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 94px;
+      height: 23px;
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      border-radius: 18px 8px 8px 18px;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,.25);
+    }
+
+    .car-nose {
+      position: absolute;
+      right: 0;
+      top: 24px;
+      width: 48px;
+      height: 10px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      border-radius: 0 999px 999px 0;
+    }
+
+    .car-cockpit {
+      position: absolute;
+      left: 46px;
+      top: 9px;
+      width: 36px;
+      height: 20px;
+      background: #111827;
+      border: 3px solid var(--gold);
+      border-radius: 999px 999px 8px 8px;
+    }
+
+    .car-wing-front {
+      position: absolute;
+      right: 0;
+      top: 16px;
+      width: 36px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 999px;
+    }
+
+    .car-wing-back {
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 28px;
+      height: 10px;
+      background: var(--gold);
+      border-radius: 999px;
+    }
+
+    .wheel {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #050505;
+      border: 4px solid #4b5563;
+      border-radius: 50%;
+      bottom: 0;
+      animation: wheelSpin .35s linear infinite;
+    }
+
+    .wheel.front { right: 25px; }
+    .wheel.back { left: 22px; }
+
+    @keyframes wheelSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .flame {
+      position: absolute;
+      left: -15px;
+      top: 28px;
+      width: 28px;
+      height: 10px;
+      background: linear-gradient(90deg, rgba(255,255,255,.1), var(--gold), var(--red));
+      border-radius: 999px 0 0 999px;
+      filter: blur(.3px);
+      animation: flamePulse .16s infinite alternate;
+    }
+
+    @keyframes flamePulse {
+      from { transform: scaleX(.75); opacity: .6; }
+      to { transform: scaleX(1.2); opacity: 1; }
+    }
+
+    /* ================= 3D CAROUSEL ================= */
+    .carousel-3d {
+      position: relative;
+      height: 440px;
+      perspective: 1100px;
+      overflow: hidden;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at center, rgba(247,201,72,.20), transparent 42%),
+        linear-gradient(135deg, rgba(0,0,0,.68), rgba(255,255,255,.045));
+      border: 1px solid rgba(247,201,72,.16);
+    }
+
+    .carousel-stage {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    .carousel-card {
+      position: absolute;
+      top: 42px;
+      left: 50%;
+      width: min(285px, 72vw);
+      height: 345px;
+      margin-left: calc(min(285px, 72vw) / -2);
+      border-radius: 28px;
+      overflow: hidden;
+      border: 3px solid rgba(247,201,72,.75);
+      box-shadow: 0 28px 70px rgba(0,0,0,.65);
+      background: #111;
+      transition: transform .75s cubic-bezier(.2,.8,.2,1), opacity .75s ease, filter .75s ease;
+    }
+
+    .carousel-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #111;
+    }
+
+    .carousel-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.38), transparent 45%);
+      pointer-events: none;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .carousel-control {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--gold), #fff0a4);
+      color: #111;
+      font-size: 1.6rem;
+      font-weight: 900;
+      box-shadow: 0 14px 30px rgba(0,0,0,.42);
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255,255,255,.28);
+      cursor: pointer;
+      transition: width .25s ease, background .25s ease;
+    }
+
+    .dot.active {
+      width: 28px;
+      background: var(--gold);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 34px 10px 14px;
+      color: #ddd;
+      font-weight: 700;
+    }
+
+    .footer strong {
+      display: block;
+      color: var(--gold);
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo {
+        min-height: 520px;
+        border-left: none;
+        border-top: 1px solid rgba(247,201,72,.18);
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 20px, 1120px);
+        padding-top: 18px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 10px;
+      }
+
+      .hero-card {
+        border-radius: 28px;
+      }
+
+      .hero-content {
+        padding: 24px;
+      }
+
+      .hero-photo {
+        min-height: 450px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .carousel-3d {
+        height: 390px;
+      }
+
+      .carousel-card {
+        top: 36px;
+        height: 305px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- VIDEO DE INICIO: coloca video_inicio.mp4 en la misma carpeta que index.html -->
+  <div class="intro" id="intro">
+    <video id="introVideo" autoplay playsinline preload="auto">
+      <source src="video_inicio.mp4" type="video/mp4">
+      Tu navegador no puede reproducir el video.
+    </video>
+
+    <div class="intro-overlay">
+      <div class="intro-panel">
+        <h1>Santiaguito ER</h1>
+        <p>La carrera está por comenzar</p>
+        <div class="intro-actions">
+          <button class="intro-btn" type="button" id="soundBtn">🔇 Desactivar sonido</button>
+          <button class="intro-btn skip" type="button" id="skipBtn">Saltar intro</button>
+        </div>
+      </div>
+
+      <div class="tap-sound-layer" id="tapSoundLayer">
+        <div class="tap-sound-card">
+          <strong>Presiona para iniciar</strong>
+          <p>Tu navegador bloqueó el sonido automático. Toca aquí para reproducir el video con sonido.</p>
+          <button class="intro-btn" type="button" id="startWithSoundBtn">▶️ Reproducir con sonido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="page">
+    <div class="confetti" aria-hidden="true">
+      <span style="left:4%; animation-duration:7s; animation-delay:.1s"></span>
+      <span style="left:12%; animation-duration:6s; animation-delay:1.1s"></span>
+      <span style="left:20%; animation-duration:8s; animation-delay:.6s"></span>
+      <span style="left:31%; animation-duration:7.4s; animation-delay:1.8s"></span>
+      <span style="left:45%; animation-duration:6.5s; animation-delay:.9s"></span>
+      <span style="left:57%; animation-duration:8.2s; animation-delay:1.5s"></span>
+      <span style="left:69%; animation-duration:6.8s; animation-delay:.4s"></span>
+      <span style="left:78%; animation-duration:7.8s; animation-delay:1.2s"></span>
+      <span style="left:88%; animation-duration:6.2s; animation-delay:.7s"></span>
+      <span style="left:96%; animation-duration:8.5s; animation-delay:1.9s"></span>
+    </div>
+
+    <div class="container">
+      <section class="hero">
+        <div class="hero-card">
+          <div class="hero-content">
+            <div class="tag">🏁 Invitación oficial</div>
+
+            <h1 class="title">
+              Cumpleaños
+              <span class="gold">Santiaguito</span>
+            </h1>
+
+            <p class="subtitle">
+              Una celebración premium con velocidad, alegría y emoción.
+              Ponte en la parrilla de salida para festejar el gran día de Santiaguito.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=4RJM%2B7M7%20Santa%20Cruz%20de%20la%20Sierra"
+                target="_blank"
+                rel="noopener"
+                class="btn blue"
+              >
+                📍 Cómo llegar
+              </a>
+
+              <a
+                href="https://wa.me/59175254305?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Santiaguito%20%F0%9F%8F%81%F0%9F%8E%89"
+                target="_blank"
+                rel="noopener"
+                class="btn green"
+              >
+                📲 Confirmar asistencia
+              </a>
+
+              <button class="btn gold" type="button" id="replayBtn">
+                🎬 Ver intro
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-photo">
+            <div class="photo-help">
+              Para mostrar la foto principal, sube una imagen con este nombre:
+              <b>img/santiaguito.jpeg</b>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-grid">
+        <article class="info-card">
+          <div class="icon">📅</div>
+          <small>Fecha oficial</small>
+          <h3>Domingo 12 de julio</h3>
+        </article>
+
+        <article class="info-card">
+          <div class="icon">🕒</div>
+          <small>Hora de largada</small>
+          <h3>15:00 horas</h3>
+        </article>
+
+        <article class="info-card">
+          <div class="icon">📍</div>
+          <small>Ubicación</small>
+          <h3>Av. Nuevo Palmar a Una cuadra del surtidor El Palmar · Santa Cruz de la Sierra</h3>
+        </article>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Cuenta regresiva</h2>
+
+        <div class="countdown">
+          <div class="timebox">
+            <strong id="days">00</strong>
+            <span>Días</span>
+          </div>
+
+          <div class="timebox">
+            <strong id="hours">00</strong>
+            <span>Horas</span>
+          </div>
+
+          <div class="timebox">
+            <strong id="minutes">00</strong>
+            <span>Minutos</span>
+          </div>
+
+          <div class="timebox">
+            <strong id="seconds">00</strong>
+            <span>Segundos</span>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="css-car" aria-hidden="true">
+            <div class="flame"></div>
+            <div class="car-wing-back"></div>
+            <div class="car-body"></div>
+            <div class="car-cockpit"></div>
+            <div class="car-nose"></div>
+            <div class="car-wing-front"></div>
+            <div class="wheel back"></div>
+            <div class="wheel front"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Galería 3D del campeón</h2>
+
+        <div class="carousel-3d" aria-label="Carrusel de fotos de Santiaguito">
+          <div class="carousel-stage" id="carouselStage">
+            <div class="carousel-card"><img src="img/foto1.png" alt="Foto de Santiaguito 1"></div>
+            <div class="carousel-card"><img src="img/foto2.png" alt="Foto de Santiaguito 2"></div>
+            <div class="carousel-card"><img src="img/foto3.jpeg" alt="Foto de Santiaguito 3"></div>
+            <div class="carousel-card"><img src="img/foto4.jpeg" alt="Foto de Santiaguito 4"></div>
+            <div class="carousel-card"><img src="img/foto5.jpeg" alt="Foto de Santiaguito 5"></div>
+            <div class="carousel-card"><img src="img/foto6.jpeg" alt="Foto de Santiaguito 6"></div>
+            <div class="carousel-card"><img src="img/foto7.jpg" alt="Foto de Santiaguito 7"></div>
+            <div class="carousel-card"><img src="img/foto8.jpeg" alt="Foto de Santiaguito 8"></div>
+            <div class="carousel-card"><img src="img/foto9.jpeg" alt="Foto de Santiaguito 9"></div>
+            <div class="carousel-card"><img src="img/foto10.jpeg" alt="Foto de Santiaguito 10"></div>
+            <div class="carousel-card"><img src="img/foto11.jpeg" alt="Foto de Santiaguito 11"></div>
+            <div class="carousel-card"><img src="img/foto12.jpeg" alt="Foto de Santiaguito 12"></div>
+            <div class="carousel-card"><img src="img/foto13.jpeg" alt="Foto de Santiaguito 13"></div>
+            <div class="carousel-card"><img src="img/foto14.jpeg" alt="Foto de Santiaguito 14"></div>
+            <div class="carousel-card"><img src="img/foto15.jpeg" alt="Foto de Santiaguito 15"></div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-control" type="button" id="prevSlide" aria-label="Foto anterior">‹</button>
+          <button class="carousel-control" type="button" id="nextSlide" aria-label="Foto siguiente">›</button>
+        </div>
+
+        <div class="dots" id="dots" aria-label="Indicadores del carrusel"></div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Pit Stop de invitados</h2>
+
+        <div class="hero-actions" style="justify-content:center">
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=4RJM%2B7M7%20Santa%20Cruz%20de%20la%20Sierra"
+            target="_blank"
+            rel="noopener"
+            class="btn blue"
+          >
+            🗺️ Abrir ubicación
+          </a>
+
+          <a
+            href="https://wa.me/59175254305?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Santiaguito%20%F0%9F%8F%81%F0%9F%8E%89"
+            target="_blank"
+            rel="noopener"
+            class="btn green"
+          >
+            ✅ Confirmar por WhatsApp
+          </a>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <strong>🏁 Santiaguito ER 🏁</strong>
+        Te esperamos para celebrar su 2da carrera inolvidable.
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const intro = document.getElementById("intro");
+    const introVideo = document.getElementById("introVideo");
+    const soundBtn = document.getElementById("soundBtn");
+    const skipBtn = document.getElementById("skipBtn");
+    const replayBtn = document.getElementById("replayBtn");
+    const tapSoundLayer = document.getElementById("tapSoundLayer");
+    const startWithSoundBtn = document.getElementById("startWithSoundBtn");
+
+    function finishIntro() {
+      intro.classList.add("hidden");
+
+      try {
+        introVideo.pause();
+      } catch (e) {}
+    }
+
+    function updateSoundButton() {
+      if (introVideo.muted || introVideo.volume === 0) {
+        soundBtn.textContent = "🔊 Activar sonido";
+      } else {
+        soundBtn.textContent = "🔇 Desactivar sonido";
+      }
+    }
+
+    function playWithSound() {
+      introVideo.muted = false;
+      introVideo.volume = 1;
+
+      return introVideo.play()
+        .then(() => {
+          tapSoundLayer.classList.remove("show");
+          updateSoundButton();
+        });
+    }
+
+    function playMutedFallback() {
+      introVideo.muted = true;
+      introVideo.volume = 0;
+
+      introVideo.play().catch(() => {});
+      tapSoundLayer.classList.add("show");
+      updateSoundButton();
+    }
+
+    function toggleSound() {
+      if (introVideo.muted || introVideo.volume === 0) {
+        playWithSound().catch(() => {
+          tapSoundLayer.classList.add("show");
+          updateSoundButton();
+        });
+      } else {
+        introVideo.muted = true;
+        introVideo.volume = 0;
+        updateSoundButton();
+      }
+    }
+
+    function tryStartVideoWithSound() {
+      introVideo.currentTime = 0;
+      introVideo.muted = false;
+      introVideo.volume = 1;
+
+      introVideo.play()
+        .then(() => {
+          tapSoundLayer.classList.remove("show");
+          updateSoundButton();
+        })
+        .catch(() => {
+          playMutedFallback();
+        });
+    }
+
+    function replayIntro() {
+      intro.classList.remove("hidden");
+      introVideo.currentTime = 0;
+
+      playWithSound().catch(() => {
+        playMutedFallback();
+      });
+    }
+
+    soundBtn.addEventListener("click", toggleSound);
+    skipBtn.addEventListener("click", finishIntro);
+    replayBtn.addEventListener("click", replayIntro);
+    startWithSoundBtn.addEventListener("click", () => {
+      playWithSound().catch(() => {
+        updateSoundButton();
+      });
+    });
+
+    introVideo.addEventListener("ended", finishIntro);
+
+    // Respaldo por si el navegador no dispara "ended". Tu video dura 1 minuto y 9 segundos.
+    setTimeout(() => {
+      if (!intro.classList.contains("hidden")) {
+        finishIntro();
+      }
+    }, 70000);
+
+    const eventDate = new Date("2026-07-12T15:00:00-04:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      const days = document.getElementById("days");
+      const hours = document.getElementById("hours");
+      const minutes = document.getElementById("minutes");
+      const seconds = document.getElementById("seconds");
+
+      if (distance <= 0) {
+        days.textContent = "00";
+        hours.textContent = "00";
+        minutes.textContent = "00";
+        seconds.textContent = "00";
+        return;
+      }
+
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((distance / (1000 * 60)) % 60);
+      const s = Math.floor((distance / 1000) % 60);
+
+      days.textContent = String(d).padStart(2, "0");
+      hours.textContent = String(h).padStart(2, "0");
+      minutes.textContent = String(m).padStart(2, "0");
+      seconds.textContent = String(s).padStart(2, "0");
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const cards = Array.from(document.querySelectorAll(".carousel-card"));
+    const dotsContainer = document.getElementById("dots");
+    const prevSlide = document.getElementById("prevSlide");
+    const nextSlide = document.getElementById("nextSlide");
+
+    let activeIndex = 0;
+
+    cards.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.className = "dot";
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Ver foto " + (index + 1));
+      dot.addEventListener("click", () => {
+        activeIndex = index;
+        renderCarousel();
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(document.querySelectorAll(".dot"));
+
+    function renderCarousel() {
+      const total = cards.length;
+
+      cards.forEach((card, index) => {
+        let offset = index - activeIndex;
+
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+
+        const abs = Math.abs(offset);
+        const translateX = offset * 135;
+        const translateZ = 220 - abs * 90;
+        const rotateY = offset * -34;
+        const scale = 1 - abs * 0.10;
+        const opacity = abs > 2 ? 0 : 1 - abs * 0.18;
+        const blur = abs > 0 ? abs * 1.2 : 0;
+        const zIndex = 10 - abs;
+
+        card.style.transform =
+          `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+
+        card.style.opacity = opacity;
+        card.style.filter = `blur(${blur}px) brightness(${abs === 0 ? 1 : 0.72})`;
+        card.style.zIndex = zIndex;
+      });
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === activeIndex);
+      });
+    }
+
+    function moveCarousel(direction) {
+      activeIndex = (activeIndex + direction + cards.length) % cards.length;
+      renderCarousel();
+    }
+
+    prevSlide.addEventListener("click", () => moveCarousel(-1));
+    nextSlide.addEventListener("click", () => moveCarousel(1));
+
+    setInterval(() => {
+      moveCarousel(1);
+    }, 4200);
+
+    renderCarousel();
+
+    window.addEventListener("load", tryStartVideoWithSound);
+  </script>
+</body>
+</html>

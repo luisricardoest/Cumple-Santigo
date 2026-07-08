@@ -4,804 +4,749 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Santiaguito GP | Invitación de Cumpleaños</title>
-  <meta name="description" content="Invitación digital del Gran Premio de Cumpleaños de Santiaguito" />
+  <title>Copa Santiaguito | Invitación de Cumpleaños</title>
+  <meta name="description" content="Invitación digital de cumpleaños de Santiaguito, temática autos de carrera" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --red: #d90429;
-      --red-dark: #7f0015;
-      --gold: #f7c948;
-      --gold-soft: #ffe08a;
-      --black: #030303;
-      --carbon: #111117;
-      --white: #ffffff;
-      --gray: #c9c9d1;
-      --green: #25d366;
-      --blue: #2563eb;
+      --red:#e32020;
+      --red-dark:#7c0000;
+      --yellow:#ffd21f;
+      --orange:#ff8a00;
+      --blue:#1aa7ff;
+      --sky:#6ddcff;
+      --black:#070707;
+      --white:#ffffff;
+      --green:#25d366;
+      --road:#1e1e1e;
+      --brown:#8b4a22;
+      --rust:#b85b28;
+      --cream:#fff4c2;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { box-sizing:border-box; margin:0; padding:0; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior:smooth; }
 
     body {
-      min-height: 100vh;
-      font-family: "Montserrat", sans-serif;
-      color: var(--white);
-      background: var(--black);
-      overflow-x: hidden;
+      font-family:"Montserrat", sans-serif;
+      color:var(--white);
+      background:#050505;
+      overflow-x:hidden;
     }
 
-    /* ================= VIDEO INTRO ================= */
     .intro {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity .9s ease, visibility .9s ease;
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      background:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:opacity .8s ease, visibility .8s ease;
     }
 
     .intro.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
     }
 
     .intro video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background: #000;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      background:#000;
     }
 
     .intro-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.58)),
-        radial-gradient(circle at center, transparent 28%, rgba(0,0,0,.78));
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 24px;
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.04));
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding:22px;
     }
 
-    .intro-panel {
-      width: min(460px, 100%);
-      text-align: center;
-      padding: 22px;
-      border-radius: 28px;
-      background: rgba(0,0,0,.58);
-      border: 1px solid rgba(247,201,72,.28);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 26px 80px rgba(0,0,0,.75);
+    .intro-box {
+      width:min(520px,100%);
+      text-align:center;
+      padding:24px;
+      border-radius:32px;
+      background:rgba(0,0,0,.68);
+      border:3px solid rgba(255,210,31,.65);
+      box-shadow:0 0 45px rgba(255,210,31,.35),0 30px 90px rgba(0,0,0,.85);
+      backdrop-filter:blur(12px);
     }
 
-    .intro-panel h1 {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(3rem, 11vw, 5.2rem);
-      letter-spacing: 2px;
-      line-height: .9;
-      color: var(--gold);
-      text-shadow: 0 0 28px rgba(247,201,72,.75);
+    .logo-title,
+    .section-title,
+    .hero-title {
+      font-family:"Bangers", cursive;
+      letter-spacing:2px;
     }
 
-    .intro-panel p {
-      margin: 10px 0 16px;
-      font-size: .95rem;
-      color: #eee;
-      font-weight: 800;
+    .logo-title {
+      font-size:clamp(3.2rem,12vw,6rem);
+      line-height:.9;
+      color:var(--yellow);
+      text-shadow:5px 5px 0 var(--red),9px 9px 0 #111;
+    }
+
+    .intro-box p {
+      margin:12px 0 18px;
+      font-weight:900;
+      text-transform:uppercase;
+      color:#fff3b0;
     }
 
     .intro-actions {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
     }
 
-    .intro-btn {
-      border: none;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 13px 18px;
-      font-weight: 900;
-      color: #111;
-      background: linear-gradient(135deg, var(--gold), #fff3ad);
-      box-shadow: 0 14px 30px rgba(0,0,0,.45);
-      transition: transform .2s ease, filter .2s ease;
+    .small-btn {
+      border:0;
+      cursor:pointer;
+      border-radius:999px;
+      padding:13px 18px;
+      font-weight:900;
+      background:linear-gradient(135deg,var(--yellow),#fff4b3);
+      color:#111;
+      box-shadow:0 16px 36px rgba(0,0,0,.45);
+      transition:.2s;
+      font-family:inherit;
     }
 
-    .intro-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.06);
+    .small-btn:hover { transform:translateY(-3px) scale(1.03); }
+
+    .small-btn.red {
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      color:#fff;
     }
 
-    .intro-btn.skip {
-      color: #fff;
-      background: linear-gradient(135deg, var(--red), var(--red-dark));
+    .tap-layer {
+      position:absolute;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:5;
+      padding:22px;
+      background:rgba(0,0,0,.5);
     }
 
-    .tap-sound-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(0,0,0,.38);
-      text-align: center;
+    .tap-layer.show { display:flex; }
+
+    .tap-card {
+      width:min(460px,100%);
+      text-align:center;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(0,0,0,.82);
+      border:3px solid var(--yellow);
+      box-shadow:0 0 45px rgba(255,210,31,.4);
     }
 
-    .tap-sound-layer.show {
-      display: flex;
+    .tap-card strong {
+      display:block;
+      font-family:"Bangers", cursive;
+      font-size:clamp(2.6rem,10vw,4.7rem);
+      color:var(--yellow);
+      text-shadow:4px 4px 0 var(--red);
+      margin-bottom:8px;
     }
 
-    .tap-sound-card {
-      width: min(440px, 100%);
-      border-radius: 26px;
-      padding: 22px;
-      background: rgba(0,0,0,.72);
-      border: 1px solid rgba(247,201,72,.35);
-      box-shadow: 0 26px 80px rgba(0,0,0,.75);
-      backdrop-filter: blur(10px);
+    .tap-card p {
+      font-weight:800;
+      margin-bottom:14px;
     }
 
-    .tap-sound-card strong {
-      display: block;
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(2.2rem, 8vw, 4rem);
-      color: var(--gold);
-      letter-spacing: 1px;
-      line-height: .95;
-      margin-bottom: 10px;
-    }
-
-    .tap-sound-card p {
-      color: #f2f2f2;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    /* ================= MAIN ================= */
     .page {
-      position: relative;
-      min-height: 100vh;
+      position:relative;
+      min-height:100vh;
+      overflow:hidden;
       background:
-        radial-gradient(circle at top left, rgba(217,4,41,.38), transparent 34%),
-        radial-gradient(circle at 80% 20%, rgba(247,201,72,.22), transparent 28%),
-        linear-gradient(145deg, #120004 0%, #050506 50%, #1e1600 100%);
-      overflow: hidden;
+        radial-gradient(circle at 15% 10%,rgba(255,210,31,.34),transparent 24%),
+        radial-gradient(circle at 82% 8%,rgba(26,167,255,.34),transparent 26%),
+        linear-gradient(180deg,#1aa7ff 0%,#74dcff 13%,#ffb13b 34%,#3c0d00 60%,#050505 100%);
     }
 
     .page::before {
-      content: "";
-      position: fixed;
-      inset: 0;
+      content:"";
+      position:fixed;
+      inset:0;
       background:
-        repeating-linear-gradient(
-          118deg,
-          transparent 0 34px,
-          rgba(255,255,255,.045) 35px 37px
-        );
-      opacity: .58;
-      animation: speedLines 2.1s linear infinite;
-      pointer-events: none;
-      z-index: 0;
+        linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.76)),
+        repeating-linear-gradient(116deg,transparent 0 34px,rgba(255,255,255,.075) 35px 38px);
+      z-index:0;
+      pointer-events:none;
+      animation:speedBg 2.1s linear infinite;
     }
 
-    .page::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.72)),
-        radial-gradient(circle at center, transparent 30%, rgba(0,0,0,.48));
-      pointer-events: none;
-      z-index: 0;
+    @keyframes speedBg {
+      to { background-position:250px 0; }
     }
 
-    @keyframes speedLines {
-      from { background-position: 0 0; }
-      to { background-position: 240px 0; }
+    .hills {
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      height:42vh;
+      z-index:0;
+      background:
+        radial-gradient(ellipse at 12% 100%,#7b2300 0 26%,transparent 27%),
+        radial-gradient(ellipse at 45% 100%,#b84700 0 36%,transparent 37%),
+        radial-gradient(ellipse at 80% 100%,#862b00 0 32%,transparent 33%);
+      opacity:.72;
+      pointer-events:none;
     }
 
     .confetti {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+      overflow:hidden;
     }
 
     .confetti span {
-      position: absolute;
-      top: -20px;
-      width: 8px;
-      height: 15px;
-      border-radius: 3px;
-      animation: confettiFall linear infinite;
-      opacity: .88;
+      position:absolute;
+      top:-18px;
+      width:8px;
+      height:15px;
+      border-radius:3px;
+      opacity:.9;
+      animation:fall linear infinite;
     }
 
-    .confetti span:nth-child(3n) { background: var(--red); }
-    .confetti span:nth-child(3n+1) { background: var(--gold); }
-    .confetti span:nth-child(3n+2) { background: #fff; }
+    .confetti span:nth-child(3n){background:var(--red);}
+    .confetti span:nth-child(3n+1){background:var(--yellow);}
+    .confetti span:nth-child(3n+2){background:#fff;}
 
-    @keyframes confettiFall {
-      to {
-        transform: translateY(110vh) rotate(720deg);
-      }
+    @keyframes fall {
+      to { transform:translateY(110vh) rotate(720deg); }
     }
 
     .container {
-      position: relative;
-      z-index: 2;
-      width: min(1120px, calc(100% - 28px));
-      margin: 0 auto;
-      padding: 28px 0 44px;
+      width:min(1140px,calc(100% - 28px));
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+      padding:26px 0 48px;
     }
 
-    /* ================= HERO ================= */
     .hero {
-      min-height: 96vh;
-      display: grid;
-      place-items: center;
+      min-height:96vh;
+      display:grid;
+      place-items:center;
     }
 
     .hero-card {
-      width: 100%;
-      border-radius: 38px;
-      overflow: hidden;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.035)),
-        rgba(8,8,12,.82);
-      border: 1px solid rgba(247,201,72,.22);
-      box-shadow: 0 38px 110px rgba(0,0,0,.72);
-      backdrop-filter: blur(16px);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      width:100%;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      border-radius:44px;
+      overflow:hidden;
+      background:rgba(12,12,16,.78);
+      border:3px solid rgba(255,210,31,.65);
+      box-shadow:0 35px 105px rgba(0,0,0,.78),0 0 50px rgba(255,210,31,.28);
+      backdrop-filter:blur(12px);
     }
 
     .hero-content {
-      padding: clamp(24px, 5vw, 56px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding:clamp(26px,5vw,60px);
     }
 
-    .tag {
-      display: inline-flex;
-      width: fit-content;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--red), var(--red-dark));
-      color: #fff;
-      font-size: .78rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      box-shadow: 0 0 26px rgba(217,4,41,.48);
-      margin-bottom: 18px;
+    .badge {
+      display:inline-flex;
+      padding:11px 17px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      color:#fff;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      box-shadow:0 0 25px rgba(227,32,32,.56);
+      margin-bottom:18px;
     }
 
-    .title {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(4.4rem, 12vw, 9rem);
-      line-height: .82;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+    .hero-title {
+      font-size:clamp(5rem,13vw,9.8rem);
+      line-height:.78;
+      color:var(--red);
+      text-transform:uppercase;
+      text-shadow:4px 4px 0 #fff,8px 8px 0 #111;
     }
 
-    .title .gold {
-      display: block;
-      color: var(--gold);
-      text-shadow: 0 0 38px rgba(247,201,72,.54);
+    .hero-title span {
+      display:block;
+      color:var(--yellow);
+      text-shadow:4px 4px 0 var(--red),8px 8px 0 #111;
     }
 
     .subtitle {
-      margin-top: 20px;
-      color: #eeeeee;
-      font-weight: 700;
-      font-size: clamp(1rem, 2.8vw, 1.25rem);
-      line-height: 1.55;
+      margin-top:22px;
+      line-height:1.55;
+      font-weight:800;
+      color:#fff6c7;
+      font-size:clamp(1rem,2.8vw,1.23rem);
     }
 
-    .hero-photo {
-      min-height: 620px;
-      position: relative;
-      background:
-        linear-gradient(to top, rgba(0,0,0,.9), transparent 55%),
-        url("img/santiaguito.jpeg");
-      background-size: cover;
-      background-position: center;
-      border-left: 1px solid rgba(247,201,72,.18);
-    }
-
-    .hero-photo::after {
-      content: "PILOTO DEL DÍA";
-      position: absolute;
-      top: 28px;
-      right: 22px;
-      transform: rotate(4deg);
-      background: linear-gradient(135deg, var(--gold), #fff1a6);
-      color: #111;
-      padding: 10px 16px;
-      border-radius: 12px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      box-shadow: 0 14px 30px rgba(0,0,0,.45);
-    }
-
-    .photo-help {
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 18px;
-      padding: 13px;
-      border-radius: 18px;
-      background: rgba(0,0,0,.68);
-      border: 1px solid rgba(247,201,72,.20);
-      color: #ddd;
-      font-size: .82rem;
-      line-height: 1.35;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
+    .actions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
     }
 
     .btn {
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      border-radius: 18px;
-      padding: 15px 18px;
-      font-weight: 900;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      transition: transform .2s ease, filter .2s ease;
-      box-shadow: 0 16px 36px rgba(0,0,0,.42);
-      font-family: inherit;
-      font-size: .95rem;
+      border:0;
+      text-decoration:none;
+      cursor:pointer;
+      padding:15px 18px;
+      border-radius:20px;
+      font-weight:900;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      color:#111;
+      background:linear-gradient(135deg,var(--yellow),#fff4b1);
+      box-shadow:0 18px 40px rgba(0,0,0,.45);
+      transition:.2s;
+      font-family:inherit;
+      font-size:.96rem;
     }
 
-    .btn:hover {
-      transform: translateY(-4px);
-      filter: brightness(1.08);
+    .btn:hover { transform:translateY(-4px) scale(1.02); filter:brightness(1.07); }
+
+    .btn.blue { background:linear-gradient(135deg,var(--blue),#1647ad); color:#fff; }
+    .btn.green { background:linear-gradient(135deg,var(--green),#11823f); color:#fff; }
+    .btn.red { background:linear-gradient(135deg,var(--red),var(--red-dark)); color:#fff; }
+
+    .hero-photo {
+      min-height:650px;
+      background:
+        linear-gradient(to top,rgba(0,0,0,.88),transparent 54%),
+        url("img/santiaguito.jpeg");
+      background-position:center;
+      background-size:cover;
+      position:relative;
+      border-left:3px solid rgba(255,210,31,.38);
     }
 
-    .btn.gold {
-      background: linear-gradient(135deg, var(--gold), #fff0a4);
-      color: #111;
+    .hero-photo::after {
+      content:"PILOTO DEL DÍA";
+      position:absolute;
+      top:22px;
+      right:22px;
+      transform:rotate(4deg);
+      background:var(--yellow);
+      color:#111;
+      padding:11px 16px;
+      border-radius:14px;
+      font-weight:900;
+      box-shadow:0 14px 30px rgba(0,0,0,.5);
     }
 
-    .btn.green {
-      background: linear-gradient(135deg, #25d366, #128c4a);
-      color: white;
+    .svg-car-wrap {
+      position:absolute;
+      bottom:22px;
+      left:18px;
+      width:min(265px,55vw);
+      z-index:5;
+      filter:drop-shadow(0 18px 12px rgba(0,0,0,.62));
+      animation:carBounce 1.25s ease-in-out infinite alternate;
     }
 
-    .btn.blue {
-      background: linear-gradient(135deg, #2f7dff, #153ea3);
-      color: white;
+    .svg-car-wrap svg { width:100%; height:auto; display:block; }
+
+    @keyframes carBounce {
+      from { transform:translateY(0) rotate(-1deg); }
+      to { transform:translateY(-8px) rotate(1deg); }
     }
 
-    /* ================= INFO ================= */
+    .mater-card {
+      position:absolute;
+      right:16px;
+      bottom:16px;
+      width:min(170px,42vw);
+      padding:10px;
+      border-radius:22px;
+      background:rgba(0,0,0,.66);
+      border:2px solid rgba(255,210,31,.55);
+      text-align:center;
+      z-index:6;
+      backdrop-filter:blur(8px);
+    }
+
+    .mater-card img {
+      width:100%;
+      display:block;
+      border-radius:16px;
+      object-fit:cover;
+      background:rgba(255,255,255,.1);
+    }
+
+    .mater-card small {
+      display:block;
+      margin-top:6px;
+      font-weight:900;
+      color:#fff4c2;
+      font-size:.72rem;
+    }
+
+    .svg-moving-car {
+      position:absolute;
+      top:12px;
+      left:-260px;
+      width:220px;
+      height:auto;
+      z-index:4;
+      animation:drive 4.8s linear infinite;
+      filter:drop-shadow(0 16px 10px rgba(0,0,0,.65));
+    }
+
+    @keyframes drive {
+      from { transform:translateX(0); }
+      to { transform:translateX(calc(100vw + 520px)); }
+    }
+
     .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 28px 0;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin:28px 0;
     }
 
     .info-card {
-      padding: 24px;
-      border-radius: 26px;
-      background:
-        linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
-      border: 1px solid rgba(247,201,72,.16);
-      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      padding:24px;
+      border-radius:30px;
+      background:linear-gradient(160deg,rgba(255,255,255,.17),rgba(0,0,0,.38));
+      border:2px solid rgba(255,210,31,.42);
+      box-shadow:0 24px 60px rgba(0,0,0,.44);
     }
 
-    .info-card .icon {
-      font-size: 2.2rem;
-      margin-bottom: 12px;
-    }
+    .info-card .icon { font-size:2.4rem; margin-bottom:10px; }
+    .info-card small { color:var(--yellow); font-weight:900; text-transform:uppercase; letter-spacing:.8px; }
+    .info-card h3 { margin-top:6px; line-height:1.35; }
 
-    .info-card small {
-      color: var(--gold-soft);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .info-card h3 {
-      margin-top: 6px;
-      font-size: 1.08rem;
-    }
-
-    /* ================= SECTIONS ================= */
     .section {
-      margin: 28px 0;
-      padding: clamp(22px, 4vw, 36px);
-      border-radius: 32px;
-      background:
-        linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
-      border: 1px solid rgba(247,201,72,.16);
-      box-shadow: 0 24px 70px rgba(0,0,0,.38);
-      backdrop-filter: blur(12px);
+      margin:28px 0;
+      padding:clamp(22px,4vw,40px);
+      border-radius:38px;
+      background:rgba(8,8,8,.72);
+      border:2px solid rgba(255,210,31,.38);
+      box-shadow:0 28px 82px rgba(0,0,0,.52);
+      backdrop-filter:blur(12px);
     }
 
     .section-title {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(2.7rem, 7vw, 5rem);
-      text-align: center;
-      letter-spacing: 2px;
-      color: var(--gold);
-      margin-bottom: 18px;
-      text-shadow: 0 0 24px rgba(247,201,72,.25);
+      font-size:clamp(3rem,9vw,6rem);
+      color:var(--yellow);
+      text-shadow:4px 4px 0 var(--red),8px 8px 0 #111;
+      text-align:center;
+      margin-bottom:22px;
     }
 
-    /* ================= COUNTDOWN ================= */
     .countdown {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
     }
 
     .timebox {
-      text-align: center;
-      padding: 20px 10px;
-      border-radius: 22px;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.78), rgba(255,255,255,.06));
-      border: 1px solid rgba(247,201,72,.14);
+      text-align:center;
+      padding:20px 10px;
+      border-radius:24px;
+      background:linear-gradient(180deg,#24242e,#090909);
+      border:2px solid rgba(255,210,31,.34);
     }
 
     .timebox strong {
-      display: block;
-      font-family: "Bebas Neue", sans-serif;
-      color: #fff;
-      font-size: clamp(2.8rem, 8vw, 5.2rem);
-      line-height: .9;
+      display:block;
+      font-family:"Bangers",cursive;
+      color:#fff;
+      font-size:clamp(3rem,9vw,5.6rem);
+      line-height:.9;
+      text-shadow:3px 3px 0 var(--red);
     }
 
     .timebox span {
-      color: var(--gold);
-      font-weight: 900;
-      font-size: .78rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      color:var(--yellow);
+      font-weight:900;
+      text-transform:uppercase;
+      font-size:.78rem;
     }
 
     .track {
-      margin-top: 26px;
-      height: 96px;
-      border-radius: 999px;
-      border: 5px solid #25252b;
-      background:
-        linear-gradient(180deg, #1d1d22 0%, #0b0b0d 48%, #24242a 100%);
-      position: relative;
-      overflow: hidden;
-      box-shadow: inset 0 0 30px rgba(0,0,0,.9);
+      margin-top:28px;
+      height:118px;
+      border-radius:999px;
+      border:5px solid #202020;
+      background:linear-gradient(180deg,#333,#0d0d0d 50%,#222);
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 0 35px rgba(0,0,0,.86);
     }
 
     .track::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 45px;
-      height: 8px;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent 0 28px,
-        var(--gold) 28px 56px
-      );
-      animation: roadMove .55s linear infinite;
-      opacity: .9;
+      content:"";
+      position:absolute;
+      top:56px;
+      left:0;
+      right:0;
+      height:8px;
+      background:repeating-linear-gradient(90deg,transparent 0 28px,var(--yellow) 28px 56px);
+      animation:road .55s linear infinite;
     }
 
-    @keyframes roadMove {
-      from { transform: translateX(0); }
-      to { transform: translateX(-56px); }
+    @keyframes road { to { transform:translateX(-56px); } }
+
+    .itinerary {
+      display:grid;
+      gap:16px;
+      max-width:840px;
+      margin:0 auto;
+      position:relative;
     }
 
-    .css-car {
-      position: absolute;
-      top: 22px;
-      left: -150px;
-      width: 138px;
-      height: 50px;
-      animation: carForward 4.5s linear infinite;
-      filter: drop-shadow(0 14px 10px rgba(0,0,0,.55));
+    .itinerary::before {
+      content:"";
+      position:absolute;
+      left:28px;
+      top:16px;
+      bottom:16px;
+      width:5px;
+      border-radius:999px;
+      background:repeating-linear-gradient(to bottom,var(--yellow) 0 18px,transparent 18px 32px);
+      opacity:.85;
     }
 
-    @keyframes carForward {
-      from { transform: translateX(0); }
-      to { transform: translateX(calc(100vw + 320px)); }
+    .itinerary-item {
+      position:relative;
+      display:grid;
+      grid-template-columns:70px 1fr;
+      gap:16px;
+      align-items:start;
+      padding:18px;
+      border-radius:26px;
+      background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(0,0,0,.4));
+      border:2px solid rgba(255,210,31,.32);
     }
 
-    .car-body {
-      position: absolute;
-      left: 18px;
-      top: 18px;
-      width: 94px;
-      height: 23px;
-      background: linear-gradient(135deg, var(--red), var(--red-dark));
-      border-radius: 18px 8px 8px 18px;
-      box-shadow: inset 0 -4px 0 rgba(0,0,0,.25);
+    .itinerary-time {
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      border:3px solid var(--yellow);
+      font-weight:900;
+      font-size:.78rem;
+      text-align:center;
+      z-index:2;
+      box-shadow:0 12px 24px rgba(0,0,0,.45);
     }
 
-    .car-nose {
-      position: absolute;
-      right: 0;
-      top: 24px;
-      width: 48px;
-      height: 10px;
-      background: linear-gradient(90deg, var(--red), var(--gold));
-      border-radius: 0 999px 999px 0;
+    .itinerary-item h3 { color:var(--yellow); font-size:1.16rem; margin-bottom:4px; }
+    .itinerary-item p { color:#fff4c4; line-height:1.45; font-weight:700; font-size:.95rem; }
+
+    .extras-grid {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
     }
 
-    .car-cockpit {
-      position: absolute;
-      left: 46px;
-      top: 9px;
-      width: 36px;
-      height: 20px;
-      background: #111827;
-      border: 3px solid var(--gold);
-      border-radius: 999px 999px 8px 8px;
+    .extra-card {
+      text-align:center;
+      padding:20px 14px;
+      border-radius:24px;
+      background:rgba(255,255,255,.12);
+      border:2px solid rgba(255,210,31,.28);
     }
 
-    .car-wing-front {
-      position: absolute;
-      right: 0;
-      top: 16px;
-      width: 36px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 999px;
-    }
+    .extra-card .emoji { font-size:2.2rem; margin-bottom:8px; }
+    .extra-card strong { display:block; color:var(--yellow); margin-bottom:4px; }
+    .extra-card span { font-size:.88rem; font-weight:700; color:#fff4c4; }
 
-    .car-wing-back {
-      position: absolute;
-      left: 0;
-      top: 16px;
-      width: 28px;
-      height: 10px;
-      background: var(--gold);
-      border-radius: 999px;
-    }
-
-    .wheel {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #050505;
-      border: 4px solid #4b5563;
-      border-radius: 50%;
-      bottom: 0;
-      animation: wheelSpin .35s linear infinite;
-    }
-
-    .wheel.front { right: 25px; }
-    .wheel.back { left: 22px; }
-
-    @keyframes wheelSpin {
-      to { transform: rotate(360deg); }
-    }
-
-    .flame {
-      position: absolute;
-      left: -15px;
-      top: 28px;
-      width: 28px;
-      height: 10px;
-      background: linear-gradient(90deg, rgba(255,255,255,.1), var(--gold), var(--red));
-      border-radius: 999px 0 0 999px;
-      filter: blur(.3px);
-      animation: flamePulse .16s infinite alternate;
-    }
-
-    @keyframes flamePulse {
-      from { transform: scaleX(.75); opacity: .6; }
-      to { transform: scaleX(1.2); opacity: 1; }
-    }
-
-    /* ================= 3D CAROUSEL ================= */
     .carousel-3d {
-      position: relative;
-      height: 440px;
-      perspective: 1100px;
-      overflow: hidden;
-      border-radius: 30px;
+      position:relative;
+      height:470px;
+      perspective:1200px;
+      overflow:hidden;
+      border-radius:34px;
       background:
-        radial-gradient(circle at center, rgba(247,201,72,.20), transparent 42%),
-        linear-gradient(135deg, rgba(0,0,0,.68), rgba(255,255,255,.045));
-      border: 1px solid rgba(247,201,72,.16);
+        radial-gradient(circle at center,rgba(255,210,31,.25),transparent 44%),
+        linear-gradient(145deg,rgba(26,167,255,.2),rgba(227,32,32,.2),rgba(0,0,0,.75));
+      border:2px solid rgba(255,210,31,.38);
     }
 
     .carousel-stage {
-      position: absolute;
-      inset: 0;
-      transform-style: preserve-3d;
+      position:absolute;
+      inset:0;
+      transform-style:preserve-3d;
     }
 
     .carousel-card {
-      position: absolute;
-      top: 42px;
-      left: 50%;
-      width: min(285px, 72vw);
-      height: 345px;
-      margin-left: calc(min(285px, 72vw) / -2);
-      border-radius: 28px;
-      overflow: hidden;
-      border: 3px solid rgba(247,201,72,.75);
-      box-shadow: 0 28px 70px rgba(0,0,0,.65);
-      background: #111;
-      transition: transform .75s cubic-bezier(.2,.8,.2,1), opacity .75s ease, filter .75s ease;
+      position:absolute;
+      top:48px;
+      left:50%;
+      width:min(292px,72vw);
+      height:352px;
+      margin-left:calc(min(292px,72vw) / -2);
+      border-radius:30px;
+      overflow:hidden;
+      border:4px solid var(--yellow);
+      box-shadow:0 30px 80px rgba(0,0,0,.68);
+      background:#111;
+      transition:transform .78s cubic-bezier(.2,.8,.2,1),opacity .78s ease,filter .78s ease;
     }
 
     .carousel-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      background: #111;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
     .carousel-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.38), transparent 45%);
-      pointer-events: none;
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,.38),transparent 45%);
+      pointer-events:none;
     }
 
     .carousel-controls {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 18px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin-top:18px;
     }
 
     .carousel-control {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--gold), #fff0a4);
-      color: #111;
-      font-size: 1.6rem;
-      font-weight: 900;
-      box-shadow: 0 14px 30px rgba(0,0,0,.42);
+      width:52px;
+      height:52px;
+      border:none;
+      border-radius:999px;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--yellow),#fff3ad);
+      color:#111;
+      font-size:1.8rem;
+      font-weight:900;
+      box-shadow:0 15px 34px rgba(0,0,0,.46);
     }
 
     .dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 14px;
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:14px;
     }
 
     .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      border: none;
-      background: rgba(255,255,255,.28);
-      cursor: pointer;
-      transition: width .25s ease, background .25s ease;
+      width:9px;
+      height:9px;
+      border:0;
+      border-radius:999px;
+      background:rgba(255,255,255,.3);
+      cursor:pointer;
+      transition:.25s;
     }
 
     .dot.active {
-      width: 28px;
-      background: var(--gold);
+      width:28px;
+      background:var(--yellow);
+    }
+
+    .message {
+      max-width:840px;
+      margin:0 auto;
+      text-align:center;
+      font-weight:800;
+      color:#fff6c7;
+      line-height:1.65;
+      font-size:1.05rem;
     }
 
     .footer {
-      text-align: center;
-      padding: 34px 10px 14px;
-      color: #ddd;
-      font-weight: 700;
+      text-align:center;
+      padding:34px 10px 16px;
+      color:#fff6c7;
+      font-weight:800;
     }
 
     .footer strong {
-      display: block;
-      color: var(--gold);
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
+      display:block;
+      font-family:"Bangers",cursive;
+      font-size:3rem;
+      color:var(--yellow);
+      text-shadow:3px 3px 0 var(--red);
     }
 
-    @media (max-width: 860px) {
-      .hero-card {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-photo {
-        min-height: 520px;
-        border-left: none;
-        border-top: 1px solid rgba(247,201,72,.18);
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
+    .float-whatsapp {
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:30;
+      width:62px;
+      height:62px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#25d366,#128c4a);
+      color:white;
+      display:grid;
+      place-items:center;
+      text-decoration:none;
+      font-size:1.8rem;
+      box-shadow:0 18px 40px rgba(0,0,0,.48);
+      animation:pulse 1.25s ease-in-out infinite alternate;
     }
 
-    @media (max-width: 560px) {
-      .container {
-        width: min(100% - 20px, 1120px);
-        padding-top: 18px;
-      }
+    @keyframes pulse { to { transform:scale(1.08); } }
 
-      .hero {
-        min-height: auto;
-        padding-top: 10px;
-      }
-
-      .hero-card {
-        border-radius: 28px;
-      }
-
-      .hero-content {
-        padding: 24px;
-      }
-
+    @media (max-width:900px) {
+      .hero-card { grid-template-columns:1fr; }
       .hero-photo {
-        min-height: 450px;
+        min-height:540px;
+        border-left:0;
+        border-top:3px solid rgba(255,210,31,.38);
       }
+      .info-grid, .extras-grid { grid-template-columns:1fr 1fr; }
+    }
 
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .countdown {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .carousel-3d {
-        height: 390px;
-      }
-
-      .carousel-card {
-        top: 36px;
-        height: 305px;
-      }
+    @media (max-width:560px) {
+      .container { width:min(100% - 20px,1140px); padding-top:18px; }
+      .hero { min-height:auto; }
+      .hero-card { border-radius:30px; }
+      .hero-content { padding:24px; }
+      .hero-photo { min-height:470px; }
+      .actions { flex-direction:column; }
+      .btn { width:100%; }
+      .countdown { grid-template-columns:repeat(2,1fr); }
+      .info-grid, .extras-grid { grid-template-columns:1fr; }
+      .carousel-3d { height:410px; }
+      .carousel-card { top:42px; height:316px; }
+      .itinerary-item { grid-template-columns:62px 1fr; padding:15px; }
+      .itinerary::before { left:25px; }
+      .svg-car-wrap { width:min(230px,58vw); }
+      .mater-card { width:min(145px,38vw); }
     }
   </style>
 </head>
 
 <body>
-  <!-- VIDEO DE INICIO: coloca video_inicio.mp4 en la misma carpeta que index.html -->
   <div class="intro" id="intro">
     <video id="introVideo" autoplay playsinline preload="auto">
       <source src="video_inicio.mp4" type="video/mp4">
@@ -809,26 +754,28 @@
     </video>
 
     <div class="intro-overlay">
-      <div class="intro-panel">
-        <h1>Santiaguito ER</h1>
-        <p>La carrera está por comenzar</p>
+      <div class="intro-box">
+        <h1 class="logo-title">Santiaguito ER</h1>
+        <p>¡Acelera, la carrera está por comenzar!</p>
         <div class="intro-actions">
-          <button class="intro-btn" type="button" id="soundBtn">🔇 Desactivar sonido</button>
-          <button class="intro-btn skip" type="button" id="skipBtn">Saltar intro</button>
+          <button class="small-btn" type="button" id="soundBtn">🔇 Desactivar sonido</button>
+          <button class="small-btn red" type="button" id="skipBtn">Saltar intro</button>
         </div>
       </div>
 
-      <div class="tap-sound-layer" id="tapSoundLayer">
-        <div class="tap-sound-card">
-          <strong>Presiona para iniciar</strong>
-          <p>Tu navegador bloqueó el sonido automático. Toca aquí para reproducir el video con sonido.</p>
-          <button class="intro-btn" type="button" id="startWithSoundBtn">▶️ Reproducir con sonido</button>
+      <div class="tap-layer" id="tapSoundLayer">
+        <div class="tap-card">
+          <strong>¡Ka-Chow!</strong>
+          <p>Tu navegador bloqueó el sonido automático. Toca para iniciar la carrera con sonido.</p>
+          <button class="small-btn" type="button" id="startWithSoundBtn">▶️ Reproducir con sonido</button>
         </div>
       </div>
     </div>
   </div>
 
   <main class="page">
+    <div class="hills"></div>
+
     <div class="confetti" aria-hidden="true">
       <span style="left:4%; animation-duration:7s; animation-delay:.1s"></span>
       <span style="left:12%; animation-duration:6s; animation-delay:1.1s"></span>
@@ -842,117 +789,197 @@
       <span style="left:96%; animation-duration:8.5s; animation-delay:1.9s"></span>
     </div>
 
+    <a class="float-whatsapp"
+       href="https://wa.me/59175254305?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Santiaguito%20%F0%9F%8F%81%F0%9F%8E%89"
+       target="_blank"
+       rel="noopener"
+       aria-label="Confirmar asistencia por WhatsApp">💬</a>
+
     <div class="container">
       <section class="hero">
         <div class="hero-card">
           <div class="hero-content">
-            <div class="tag">🏁 Invitación oficial</div>
+            <div class="badge">🏁 Invitación oficial de carrera</div>
 
-            <h1 class="title">
-              Cumpleaños
-              <span class="gold">Santiaguito</span>
+            <h1 class="hero-title">
+              Copa
+              <span>Santiaguito</span>
             </h1>
 
             <p class="subtitle">
-              Una celebración premium con velocidad, alegría y emoción.
-              Ponte en la parrilla de salida para festejar el gran día de Santiaguito.
+              Prepárate para una fiesta llena de velocidad, juegos, alegría, sorpresas y mucha diversión.
+              Santiaguito te espera en la pista para celebrar su segunda carrera inolvidable.
             </p>
 
-            <div class="hero-actions">
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=4RJM%2B7M7%20Santa%20Cruz%20de%20la%20Sierra"
-                target="_blank"
-                rel="noopener"
-                class="btn blue"
-              >
-                📍 Cómo llegar
-              </a>
+            <div class="actions">
+              <a class="btn blue"
+                 href="https://www.google.com/maps/search/?api=1&query=Av.%20Nuevo%20Palmar%20a%20Una%20cuadra%20del%20surtidor%20El%20Palmar%20Santa%20Cruz%20de%20la%20Sierra"
+                 target="_blank"
+                 rel="noopener">📍 Cómo llegar</a>
 
-              <a
-                href="https://wa.me/59175254305?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Santiaguito%20%F0%9F%8F%81%F0%9F%8E%89"
-                target="_blank"
-                rel="noopener"
-                class="btn green"
-              >
-                📲 Confirmar asistencia
-              </a>
+              <a class="btn green"
+                 href="https://wa.me/59175254305?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Santiaguito%20%F0%9F%8F%81%F0%9F%8E%89"
+                 target="_blank"
+                 rel="noopener">📲 Confirmar asistencia</a>
 
-              <button class="btn gold" type="button" id="replayBtn">
-                🎬 Ver intro
-              </button>
+              <button class="btn" type="button" id="replayBtn">🎬 Ver intro</button>
             </div>
           </div>
 
           <div class="hero-photo">
-            <div class="photo-help">
-              Para mostrar la foto principal, sube una imagen con este nombre:
-              <b>img/santiaguito.jpeg</b>
+            <div class="svg-car-wrap" aria-hidden="true">
+              <svg viewBox="0 0 520 260" role="img" aria-label="Auto rojo animado de carrera">
+                <defs>
+                  <linearGradient id="carRed" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff5151"/>
+                    <stop offset="55%" stop-color="#e32020"/>
+                    <stop offset="100%" stop-color="#8b0000"/>
+                  </linearGradient>
+                  <linearGradient id="windowBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#dff7ff"/>
+                    <stop offset="100%" stop-color="#1aa7ff"/>
+                  </linearGradient>
+                </defs>
+                <ellipse cx="260" cy="222" rx="188" ry="28" fill="rgba(0,0,0,.35)"/>
+                <path d="M92 154 C108 94 168 78 232 74 L312 74 C374 78 428 103 455 148 C480 151 498 170 498 193 C498 213 481 228 460 228 L76 228 C52 228 35 211 40 188 C45 167 62 155 92 154Z" fill="url(#carRed)" stroke="#ffdf52" stroke-width="8"/>
+                <path d="M174 82 C197 37 274 31 328 76 L352 117 L141 117 C148 101 157 90 174 82Z" fill="url(#carRed)" stroke="#ffdf52" stroke-width="8"/>
+                <path d="M188 83 C210 58 255 52 277 79 L289 111 L159 111 C166 96 173 88 188 83Z" fill="url(#windowBlue)" stroke="#111" stroke-width="5"/>
+                <path d="M290 79 C313 82 331 99 340 113 L297 113 Z" fill="url(#windowBlue)" stroke="#111" stroke-width="5"/>
+                <circle cx="172" cy="124" r="19" fill="#fff" stroke="#111" stroke-width="5"/>
+                <circle cx="224" cy="124" r="19" fill="#fff" stroke="#111" stroke-width="5"/>
+                <circle cx="178" cy="127" r="7" fill="#111"/>
+                <circle cx="230" cy="127" r="7" fill="#111"/>
+                <path d="M260 172 C294 198 354 198 393 171" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+                <path d="M123 156 L189 156 L151 197 L212 197" fill="none" stroke="#ffd21f" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="137" cy="224" r="38" fill="#111"/>
+                <circle cx="137" cy="224" r="23" fill="#6b7280"/>
+                <circle cx="137" cy="224" r="10" fill="#d1d5db"/>
+                <circle cx="405" cy="224" r="38" fill="#111"/>
+                <circle cx="405" cy="224" r="23" fill="#6b7280"/>
+                <circle cx="405" cy="224" r="10" fill="#d1d5db"/>
+                <path d="M62 183 C35 171 18 164 4 158 C25 157 46 159 70 170Z" fill="#ffd21f" opacity=".9"/>
+              </svg>
+            </div>
+
+            <div class="mater-card">
+              <img src="img/mate.png" alt="Imagen opcional de una grúa amigable estilo carreras">
+              <small>Sube tu imagen como img/mate.png</small>
             </div>
           </div>
         </div>
       </section>
 
       <section class="info-grid">
-        <article class="info-card">
-          <div class="icon">📅</div>
-          <small>Fecha oficial</small>
-          <h3>Domingo 12 de julio</h3>
-        </article>
-
-        <article class="info-card">
-          <div class="icon">🕒</div>
-          <small>Hora de largada</small>
-          <h3>15:00 horas</h3>
-        </article>
-
-        <article class="info-card">
-          <div class="icon">📍</div>
-          <small>Ubicación</small>
-          <h3>Av. Nuevo Palmar a Una cuadra del surtidor El Palmar · Santa Cruz de la Sierra</h3>
-        </article>
+        <article class="info-card"><div class="icon">📅</div><small>Fecha oficial</small><h3>Domingo 12 de julio</h3></article>
+        <article class="info-card"><div class="icon">🕒</div><small>Horario</small><h3>15:00 a 19:30 horas</h3></article>
+        <article class="info-card"><div class="icon">📍</div><small>Ubicación</small><h3>Av. Nuevo Palmar a una cuadra del surtidor El Palmar · Santa Cruz de la Sierra</h3></article>
       </section>
 
       <section class="section">
         <h2 class="section-title">Cuenta regresiva</h2>
 
         <div class="countdown">
-          <div class="timebox">
-            <strong id="days">00</strong>
-            <span>Días</span>
-          </div>
-
-          <div class="timebox">
-            <strong id="hours">00</strong>
-            <span>Horas</span>
-          </div>
-
-          <div class="timebox">
-            <strong id="minutes">00</strong>
-            <span>Minutos</span>
-          </div>
-
-          <div class="timebox">
-            <strong id="seconds">00</strong>
-            <span>Segundos</span>
-          </div>
+          <div class="timebox"><strong id="days">00</strong><span>Días</span></div>
+          <div class="timebox"><strong id="hours">00</strong><span>Horas</span></div>
+          <div class="timebox"><strong id="minutes">00</strong><span>Minutos</span></div>
+          <div class="timebox"><strong id="seconds">00</strong><span>Segundos</span></div>
         </div>
 
         <div class="track">
-          <div class="css-car" aria-hidden="true">
-            <div class="flame"></div>
-            <div class="car-wing-back"></div>
-            <div class="car-body"></div>
-            <div class="car-cockpit"></div>
-            <div class="car-nose"></div>
-            <div class="car-wing-front"></div>
-            <div class="wheel back"></div>
-            <div class="wheel front"></div>
+          <svg class="svg-moving-car" viewBox="0 0 520 260" aria-hidden="true">
+            <defs>
+              <linearGradient id="trackCarRed" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff5151"/>
+                <stop offset="60%" stop-color="#e32020"/>
+                <stop offset="100%" stop-color="#8b0000"/>
+              </linearGradient>
+              <linearGradient id="trackWindowBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#dff7ff"/>
+                <stop offset="100%" stop-color="#1aa7ff"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="260" cy="222" rx="188" ry="28" fill="rgba(0,0,0,.35)"/>
+            <path d="M92 154 C108 94 168 78 232 74 L312 74 C374 78 428 103 455 148 C480 151 498 170 498 193 C498 213 481 228 460 228 L76 228 C52 228 35 211 40 188 C45 167 62 155 92 154Z" fill="url(#trackCarRed)" stroke="#ffdf52" stroke-width="8"/>
+            <path d="M174 82 C197 37 274 31 328 76 L352 117 L141 117 C148 101 157 90 174 82Z" fill="url(#trackCarRed)" stroke="#ffdf52" stroke-width="8"/>
+            <path d="M188 83 C210 58 255 52 277 79 L289 111 L159 111 C166 96 173 88 188 83Z" fill="url(#trackWindowBlue)" stroke="#111" stroke-width="5"/>
+            <path d="M290 79 C313 82 331 99 340 113 L297 113 Z" fill="url(#trackWindowBlue)" stroke="#111" stroke-width="5"/>
+            <circle cx="172" cy="124" r="19" fill="#fff" stroke="#111" stroke-width="5"/>
+            <circle cx="224" cy="124" r="19" fill="#fff" stroke="#111" stroke-width="5"/>
+            <circle cx="178" cy="127" r="7" fill="#111"/>
+            <circle cx="230" cy="127" r="7" fill="#111"/>
+            <path d="M260 172 C294 198 354 198 393 171" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+            <path d="M123 156 L189 156 L151 197 L212 197" fill="none" stroke="#ffd21f" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="137" cy="224" r="38" fill="#111"/>
+            <circle cx="137" cy="224" r="23" fill="#6b7280"/>
+            <circle cx="137" cy="224" r="10" fill="#d1d5db"/>
+            <circle cx="405" cy="224" r="38" fill="#111"/>
+            <circle cx="405" cy="224" r="23" fill="#6b7280"/>
+            <circle cx="405" cy="224" r="10" fill="#d1d5db"/>
+            <path d="M62 183 C35 171 18 164 4 158 C25 157 46 159 70 170Z" fill="#ffd21f" opacity=".9"/>
+          </svg>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Itinerario de carrera</h2>
+
+        <div class="itinerary">
+          <div class="itinerary-item">
+            <div class="itinerary-time">15:00</div>
+            <div><h3>Recepción de pilotos</h3><p>Llegada de invitados, saludos, fotos y bienvenida a la pista.</p></div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">15:20</div>
+            <div><h3>Juegos y actividades de carrera</h3><p>Dinámicas, risas, premios y actividades para los pequeños corredores.</p></div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">16:00</div>
+            <div><h3>Sesión de fotos con el campeón</h3><p>Fotos con Santiaguito, familia e invitados en modo Gran Premio.</p></div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">16:30</div>
+            <div><h3>Pit stop de refrigerio</h3><p>Un descanso delicioso para recargar energía y seguir celebrando.</p></div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">17:15</div>
+            <div><h3>Juegos, premios y sorpresas</h3><p>Más diversión en la pista con premios para los pequeños pilotos.</p></div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">18:00</div>
+            <div><h3>Torta y cumpleaños feliz</h3><p>Encendemos las velitas y celebramos la segunda vuelta de Santiaguito.</p></div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">18:30</div>
+            <div><h3>Dulces, piñata y regalos</h3><p>Momento de compartir dulces, sorpresas y mucha alegría.</p></div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">19:00</div>
+            <div><h3>Recuerditos y fotografías finales</h3><p>Entrega de recuerdos y últimas fotos de esta carrera inolvidable.</p></div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">19:30</div>
+            <div><h3>Bandera a cuadros</h3><p>Fin del Gran Premio de Santiaguito. ¡Gracias por acompañarnos!</p></div>
           </div>
         </div>
       </section>
 
       <section class="section">
-        <h2 class="section-title">Galería 3D del campeón</h2>
+        <h2 class="section-title">Habrá en la pista</h2>
+
+        <div class="extras-grid">
+          <div class="extra-card"><div class="emoji">🎂</div><strong>Torta</strong><span>Momento especial para cantar.</span></div>
+          <div class="extra-card"><div class="emoji">🎈</div><strong>Decoración</strong><span>Temática de autos y carreras.</span></div>
+          <div class="extra-card"><div class="emoji">🏆</div><strong>Premios</strong><span>Sorpresas para los pilotos.</span></div>
+          <div class="extra-card"><div class="emoji">📸</div><strong>Fotos</strong><span>Recuerdos del gran día.</span></div>
+          <div class="extra-card"><div class="emoji">🍭</div><strong>Dulces</strong><span>Para los pequeños corredores.</span></div>
+          <div class="extra-card"><div class="emoji">🧃</div><strong>Bebidas</strong><span>Un pit stop refrescante.</span></div>
+          <div class="extra-card"><div class="emoji">🎁</div><strong>Regalitos</strong><span>Detalles para invitados.</span></div>
+          <div class="extra-card"><div class="emoji">🏁</div><strong>Diversión</strong><span>Una carrera inolvidable.</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Galería del campeón</h2>
 
         <div class="carousel-3d" aria-label="Carrusel de fotos de Santiaguito">
           <div class="carousel-stage" id="carouselStage">
@@ -975,40 +1002,35 @@
         </div>
 
         <div class="carousel-controls">
-          <button class="carousel-control" type="button" id="prevSlide" aria-label="Foto anterior">‹</button>
-          <button class="carousel-control" type="button" id="nextSlide" aria-label="Foto siguiente">›</button>
+          <button class="carousel-control" type="button" id="prevSlide">‹</button>
+          <button class="carousel-control" type="button" id="nextSlide">›</button>
         </div>
-
-        <div class="dots" id="dots" aria-label="Indicadores del carrusel"></div>
+        <div class="dots" id="dots"></div>
       </section>
 
       <section class="section">
-        <h2 class="section-title">Pit Stop de invitados</h2>
+        <h2 class="section-title">Mensaje para invitados</h2>
+        <p class="message">
+          Tu presencia hará que esta carrera sea aún más especial. Ven con muchas ganas de divertirte,
+          compartir, tomarte fotos y acompañar a Santiaguito en su gran día. ¡La pista está lista y el campeón te espera!
+        </p>
 
-        <div class="hero-actions" style="justify-content:center">
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=4RJM%2B7M7%20Santa%20Cruz%20de%20la%20Sierra"
-            target="_blank"
-            rel="noopener"
-            class="btn blue"
-          >
-            🗺️ Abrir ubicación
-          </a>
+        <div class="actions" style="justify-content:center">
+          <a class="btn blue"
+             href="https://www.google.com/maps/search/?api=1&query=Av.%20Nuevo%20Palmar%20a%20Una%20cuadra%20del%20surtidor%20El%20Palmar%20Santa%20Cruz%20de%20la%20Sierra"
+             target="_blank"
+             rel="noopener">🗺️ Abrir ubicación</a>
 
-          <a
-            href="https://wa.me/59175254305?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Santiaguito%20%F0%9F%8F%81%F0%9F%8E%89"
-            target="_blank"
-            rel="noopener"
-            class="btn green"
-          >
-            ✅ Confirmar por WhatsApp
-          </a>
+          <a class="btn green"
+             href="https://wa.me/59175254305?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Santiaguito%20%F0%9F%8F%81%F0%9F%8E%89"
+             target="_blank"
+             rel="noopener">✅ Confirmar por WhatsApp</a>
         </div>
       </section>
 
       <footer class="footer">
-        <strong>🏁 Santiaguito ER 🏁</strong>
-        Te esperamos para celebrar su 2da carrera inolvidable.
+        <strong>¡Ka-Chow!</strong>
+        Santiaguito te espera para celebrar su 2da carrera inolvidable.
       </footer>
     </div>
   </main>
@@ -1024,35 +1046,27 @@
 
     function finishIntro() {
       intro.classList.add("hidden");
-
-      try {
-        introVideo.pause();
-      } catch (e) {}
+      try { introVideo.pause(); } catch (e) {}
     }
 
     function updateSoundButton() {
-      if (introVideo.muted || introVideo.volume === 0) {
-        soundBtn.textContent = "🔊 Activar sonido";
-      } else {
-        soundBtn.textContent = "🔇 Desactivar sonido";
-      }
+      soundBtn.textContent = (introVideo.muted || introVideo.volume === 0)
+        ? "🔊 Activar sonido"
+        : "🔇 Desactivar sonido";
     }
 
     function playWithSound() {
       introVideo.muted = false;
       introVideo.volume = 1;
-
-      return introVideo.play()
-        .then(() => {
-          tapSoundLayer.classList.remove("show");
-          updateSoundButton();
-        });
+      return introVideo.play().then(() => {
+        tapSoundLayer.classList.remove("show");
+        updateSoundButton();
+      });
     }
 
     function playMutedFallback() {
       introVideo.muted = true;
       introVideo.volume = 0;
-
       introVideo.play().catch(() => {});
       tapSoundLayer.classList.add("show");
       updateSoundButton();
@@ -1075,60 +1089,36 @@
       introVideo.currentTime = 0;
       introVideo.muted = false;
       introVideo.volume = 1;
-
-      introVideo.play()
-        .then(() => {
-          tapSoundLayer.classList.remove("show");
-          updateSoundButton();
-        })
-        .catch(() => {
-          playMutedFallback();
-        });
+      introVideo.play().then(() => {
+        tapSoundLayer.classList.remove("show");
+        updateSoundButton();
+      }).catch(() => playMutedFallback());
     }
 
     function replayIntro() {
       intro.classList.remove("hidden");
       introVideo.currentTime = 0;
-
-      playWithSound().catch(() => {
-        playMutedFallback();
-      });
+      playWithSound().catch(() => playMutedFallback());
     }
 
     soundBtn.addEventListener("click", toggleSound);
     skipBtn.addEventListener("click", finishIntro);
     replayBtn.addEventListener("click", replayIntro);
-    startWithSoundBtn.addEventListener("click", () => {
-      playWithSound().catch(() => {
-        updateSoundButton();
-      });
-    });
-
+    startWithSoundBtn.addEventListener("click", () => playWithSound().catch(() => updateSoundButton()));
     introVideo.addEventListener("ended", finishIntro);
 
-    // Respaldo por si el navegador no dispara "ended". Tu video dura 1 minuto y 9 segundos.
     setTimeout(() => {
-      if (!intro.classList.contains("hidden")) {
-        finishIntro();
-      }
+      if (!intro.classList.contains("hidden")) finishIntro();
     }, 70000);
 
     const eventDate = new Date("2026-07-12T15:00:00-04:00").getTime();
 
     function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      const days = document.getElementById("days");
-      const hours = document.getElementById("hours");
-      const minutes = document.getElementById("minutes");
-      const seconds = document.getElementById("seconds");
+      const distance = eventDate - Date.now();
+      const ids = ["days","hours","minutes","seconds"];
 
       if (distance <= 0) {
-        days.textContent = "00";
-        hours.textContent = "00";
-        minutes.textContent = "00";
-        seconds.textContent = "00";
+        ids.forEach(id => document.getElementById(id).textContent = "00");
         return;
       }
 
@@ -1137,10 +1127,10 @@
       const m = Math.floor((distance / (1000 * 60)) % 60);
       const s = Math.floor((distance / 1000) % 60);
 
-      days.textContent = String(d).padStart(2, "0");
-      hours.textContent = String(h).padStart(2, "0");
-      minutes.textContent = String(m).padStart(2, "0");
-      seconds.textContent = String(s).padStart(2, "0");
+      document.getElementById("days").textContent = String(d).padStart(2,"0");
+      document.getElementById("hours").textContent = String(h).padStart(2,"0");
+      document.getElementById("minutes").textContent = String(m).padStart(2,"0");
+      document.getElementById("seconds").textContent = String(s).padStart(2,"0");
     }
 
     setInterval(updateCountdown, 1000);
@@ -1150,14 +1140,12 @@
     const dotsContainer = document.getElementById("dots");
     const prevSlide = document.getElementById("prevSlide");
     const nextSlide = document.getElementById("nextSlide");
-
     let activeIndex = 0;
 
     cards.forEach((_, index) => {
       const dot = document.createElement("button");
       dot.className = "dot";
       dot.type = "button";
-      dot.setAttribute("aria-label", "Ver foto " + (index + 1));
       dot.addEventListener("click", () => {
         activeIndex = index;
         renderCarousel();
@@ -1172,30 +1160,24 @@
 
       cards.forEach((card, index) => {
         let offset = index - activeIndex;
-
         if (offset > total / 2) offset -= total;
         if (offset < -total / 2) offset += total;
 
         const abs = Math.abs(offset);
         const translateX = offset * 135;
-        const translateZ = 220 - abs * 90;
+        const translateZ = 230 - abs * 92;
         const rotateY = offset * -34;
-        const scale = 1 - abs * 0.10;
+        const scale = 1 - abs * 0.1;
         const opacity = abs > 2 ? 0 : 1 - abs * 0.18;
-        const blur = abs > 0 ? abs * 1.2 : 0;
-        const zIndex = 10 - abs;
+        const blur = abs > 0 ? abs * 1.1 : 0;
 
-        card.style.transform =
-          `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
-
+        card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
         card.style.opacity = opacity;
-        card.style.filter = `blur(${blur}px) brightness(${abs === 0 ? 1 : 0.72})`;
-        card.style.zIndex = zIndex;
+        card.style.filter = `blur(${blur}px) brightness(${abs === 0 ? 1 : 0.76})`;
+        card.style.zIndex = 30 - abs;
       });
 
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === activeIndex);
-      });
+      dots.forEach((dot, index) => dot.classList.toggle("active", index === activeIndex));
     }
 
     function moveCarousel(direction) {
@@ -1206,10 +1188,7 @@
     prevSlide.addEventListener("click", () => moveCarousel(-1));
     nextSlide.addEventListener("click", () => moveCarousel(1));
 
-    setInterval(() => {
-      moveCarousel(1);
-    }, 4200);
-
+    setInterval(() => moveCarousel(1), 4200);
     renderCarousel();
 
     window.addEventListener("load", tryStartVideoWithSound);
